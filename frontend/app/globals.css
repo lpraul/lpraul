@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-display: var(--font-orbitron), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+  --color-background: #06040f;
+  --color-foreground: #f8fbff;
+  --color-accent-neon: #38f9ff;
+  --color-card: rgba(12, 11, 34, 0.72);
+  --color-card-border: rgba(56, 249, 255, 0.25);
+}
+
+[data-theme='light'] {
+  --color-background: #f8fbff;
+  --color-foreground: #05020e;
+  --color-accent-neon: #634bff;
+  --color-card: rgba(255, 255, 255, 0.64);
+  --color-card-border: rgba(99, 75, 255, 0.35);
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  background: radial-gradient(circle at 20% 20%, rgba(99, 75, 255, 0.35), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(56, 249, 255, 0.2), transparent 50%),
+    #05020e;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top, rgba(99, 75, 255, 0.45), transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(56, 249, 255, 0.3), transparent 65%),
+    linear-gradient(160deg, rgba(5, 2, 14, 0.95), rgba(5, 2, 14, 0.85));
+  color: var(--color-foreground);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle at 10% 20%, rgba(0, 255, 178, 0.15), transparent 35%),
+    linear-gradient(125deg, rgba(99, 75, 255, 0.15), transparent 65%),
+    linear-gradient(45deg, rgba(56, 249, 255, 0.12), transparent 70%);
+  filter: blur(45px);
+  opacity: 0.9;
+}
+
+::selection {
+  background: rgba(56, 249, 255, 0.5);
+  color: #05020e;
+}
+
+a {
+  @apply focus-ring-neon focus-visible:outline-none;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-wide text-glow;
+  }
+
+  :focus-visible {
+    @apply focus-ring-neon;
+  }
+}
+
+@layer components {
+  .glass-surface {
+    @apply glass-panel border border-[color:var(--color-card-border)] bg-[color:var(--color-card)] text-foreground shadow-neon backdrop-blur-glass;
+  }
+
+  .neon-divider {
+    @apply h-px w-full bg-gradient-to-r from-accent-cyan/60 via-accent-magenta/60 to-accent-lime/60;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: var(--grid-overlay, linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 0),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08) 1px, transparent 0));
+    background-size: 120px 120px;
+    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9), transparent 65%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .clip-path-futuristic {
+    clip-path: polygon(0 8%, 8% 0, 92% 0, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0 92%);
+  }
+}
